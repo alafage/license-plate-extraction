@@ -17,14 +17,22 @@ class Decoder(object):
     
     def __call__(self, inputs) -> str:
         arr = inputs.numpy()
-        output = "".join([self.characters[idx] for idx in arr])
+        decoded = [self.characters[idx] for idx in arr]
+        output = "".join([
+            decoded[i]
+            for i in range(len(decoded)-1)
+            if decoded[i]!=decoded[i+1]
+        ] + [decoded[len(decoded)-1]])
+        output = "".join([
+            c for c in output if c != self.characters[0]
+        ])
         return output
 
 
 if __name__ == "__main__":
-    text = "A001KB09"
+    text = "A__0_0077__HA550"
     characters = [
-        ' ', 'A', 'B', 'C', 'D', 'E',
+        '_', 'A', 'B', 'C', 'D', 'E',
         'F', 'G', 'H', 'I', 'J', 'K',
         'L', 'M', 'N', 'O', 'P', 'Q',
         'R', 'S', 'T', 'U', 'V', 'W',
