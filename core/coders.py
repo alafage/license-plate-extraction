@@ -25,7 +25,7 @@ class Reducer(object):
             ] + [inputs[inputs.size()[0]-1]]
         )
         reduced = torch.IntTensor([
-            patch[i] if i<patch.size()[0] else -1
+            patch[i] if i<patch.size()[0] else 0
             for i in range(self.target_size)
         ])
         return reduced
